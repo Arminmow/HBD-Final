@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy Birthday</title>
+
+
+    <link rel="stylesheet" href="Style/style.css">
+    <link rel="stylesheet" href="Style/Fonts/myFont/myFont.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+
+</head>
+<body>
+
+
+    <div id="modal-container">
+        <div id="bc" class="modal-background">
+            <div class="modal">
+                <div class="wrap">
+                    <div class="postcard">
+
+                        <div style="width: 400px" class="letter">
+                            <form action="#" method="post" class="message_form">
+                                <p id="title" style="font-family: 'Josefin Slab', serif; font-weight: bold" class="push"></p>
+                                <p></p><br>
+
+
+                                <div style="font-family: 'Josefin Slab', serif; text-align: left; margin: 35px 0px; line-height: 37px" class="myText" id="message" name="message_to_recipient">
+
+                                </div>
+
+
+                                <br>
+                                <p id="ending" style="font-family: 'Josefin Slab', serif; font-weight: bold"></p><br>
+                            </form>
+                        </div>
+
+                        <div class="address">
+                            <img src="Style/imgs/stamp.png"
+                                 class="mail_stamp">
+                            <form action="#" method="post" class="message_form">
+                                <img style="width: 130px; height: 200px" id="recipient_email" src="Style/imgs/couple.png">
+                            </form>
+                            <p style="margin-top: 50px" id="address">💕 Our First Birthday Together 💕<br>
+                                <br>
+                                1400/9/9
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <audio id="audio" src="prefect.mp3"></audio>
+    </div>
+
+
+    <div id="four" class="button envlope-wrapper">
+        <div id="envelope" class="close">
+            <div class="front flap"></div>
+            <div class="front pocket"></div>
+            <div class="cardLetter">
+                <div class="words line1"></div>
+                <div class="words line2"></div>
+                <div class="words line3"></div>
+                <div class="words line4"></div>
+            </div>
+            <div class="hearts">
+                <div class="heart a1"></div>
+                <div class="heart a2"></div>
+                <div class="heart a3"></div>
+            </div>
+        </div>
+    </div>
+    <div style="top: 1000px" class="reset">
+        <button id="open">Open</button>
+        <button id="reset">Reset</button>
+    </div>
+
+
+
+
+    <h1 style="font-family: Lovely; margin-top: 450px; color: black"> OPEN ME :)</h1>
+    <h3 style="text-align: center ; margin-top: 30px; font-size: 20px">Just open it and watch . Do not close it until the end . <br/><br/> Hope you like it 💌.</h3>
+
+
+<script>
+
+    var message = "\"You are nothing short of amazing. \n" +
+        "Having you around is everything I ever needed. I’m grateful I get to share your special day with you, I know how you always go out of your way to give your best for everyone’s comfort, I could never give you all you truly deserve but know this, I love you very much and I will stand by and with you on this journey of life.\n" +
+        "Happy birthday to you my darling, may all your beautiful dreams come true.\""
+
+    var title = "My Dearest , Parnian";
+
+    var ending = "Your's , Armin ❤ "
+
+    var i = 0;
+    var j = 0;
+    var l = 0;
+    var speed = 100;
+
+    function typeMessage (){
+        if (i < message.length){
+            document.getElementById('message').innerHTML += message.charAt(i);
+            i++;
+            setTimeout(typeMessage , speed)
+        }else {
+            setTimeout(typeEnding , 500)
+        }
+    }
+
+    function typeTitle (){
+        if (j < title.length){
+            document.getElementById('title').innerHTML += title.charAt(j);
+            j++;
+            setTimeout(typeTitle , speed)
+        }else {
+            setTimeout(typeMessage , 500)
+        }
+    }
+
+    function typeEnding (){
+        if (l < ending.length){
+            document.getElementById('ending').innerHTML += ending.charAt(l);
+            l++;
+            setTimeout(typeEnding , speed)
+        }
+    }
+
+    function playSong(){
+        var audio = document.getElementById('audio');
+        audio.play();
+    }
+
+    function stopSong() {
+        var audio = document.getElementById('audio');
+        audio.pause();
+    }
+
+    $('.button').click(function () {
+        playSong();
+        var buttonId = $(this).attr('id');
+        $('#modal-container').removeAttr('class').addClass(buttonId);
+        $('body').addClass('modal-active');
+    })
+
+    $('#modal-container').click(function () {
+        $(this).addClass('out');
+        $('body').removeClass('modal-active');
+    });
+
+    $( document ).ready(function() {
+
+        var envelope = $('#envelope');
+        var btn_open = $("#open");
+        var btn_reset = $("#bc");
+
+        envelope.click( function() {
+            open();
+        });
+        btn_open.click( function() {
+            open();
+        });
+        btn_reset.click( function() {
+            close();
+        });
+
+        function open() {
+            console.log("open")
+            envelope.addClass("open")
+                .removeClass("close");
+            typeTitle();
+        }
+        function close() {
+            stopSong();
+            console.log("close")
+            envelope.addClass("close")
+                .removeClass("open");
+        }
+
+    });
+</script>
+</body>
+</html>
